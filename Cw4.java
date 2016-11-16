@@ -5,6 +5,14 @@
  */
 package gui;
 
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -125,6 +133,19 @@ public class Cw4 extends javax.swing.JFrame {
 
         if (luhnCheck(PESEL.getText())) {            
             JOptionPane.showMessageDialog(this,"Numer jest prawidłowy");
+            
+            PrintWriter pw;
+            try{
+                FileWriter file = new FileWriter("plik.txt", true);
+                BufferedWriter out = new BufferedWriter(file);
+                out.append(PESEL.getText());
+                out.newLine();
+                out.close();
+
+            } catch (IOException ex) {
+                System.out.println ("Brak pliku");
+            }
+            
         } else {
             JOptionPane.showMessageDialog(this,"Numer jest nieprawidłowy");
         }
